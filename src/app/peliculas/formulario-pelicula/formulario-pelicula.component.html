@@ -34,6 +34,12 @@
     <h4>Seleccione los géneros</h4>
     <app-selector-multiple [NoSelecionados]="generosNoSeleccionados" [Selecionados]="generosSeleccionados"></app-selector-multiple>
 
+    <h4>Seleccione los cines</h4>
+    <app-selector-multiple [NoSelecionados]="cinesNoSeleccionados" [Selecionados]="cinesSeleccionados"></app-selector-multiple>
+
+    <h4>Seleccione los actores</h4>
+    <app-autocomplete-actores></app-autocomplete-actores>
+
     <div>
         <button mat-flat-button color="primary" [disabled]="form.invalid">
             Guardar Cambios

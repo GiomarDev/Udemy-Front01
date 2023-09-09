@@ -24,6 +24,10 @@ export class FormularioPeliculaComponent implements OnInit{
 
   generosSeleccionados: MultipleSelectorModel[] = [];
 
+  cinesNoSeleccionados: MultipleSelectorModel[] = [{llave: 1, valor: 'Lima'},{llave: 2, valor: 'Junin'},{llave: 3, valor: 'Puno'}]
+
+  cinesSeleccionados: MultipleSelectorModel[] = [];
+
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       titulo: ['', { validators: [Validators.required]}],
@@ -32,7 +36,8 @@ export class FormularioPeliculaComponent implements OnInit{
       trailer: '',
       fechaLanzamiento: '',
       poster: '',
-      generosId: ''
+      generosId: '',
+      cinesId: ''
     });
 
     if(this.modelo !== undefined){
@@ -43,6 +48,9 @@ export class FormularioPeliculaComponent implements OnInit{
   guardarCambios(){
     const generosIds = this.generosSeleccionados.map(val => val.llave);
     this.form.get('generosId').setValue(generosIds);
+
+    const cinesIds = this.cinesSeleccionados.map(val => val.llave);
+    this.form.get('cinesId').setValue(cinesIds);
     this.OnSubmit.emit(this.form.value);
   }
 
