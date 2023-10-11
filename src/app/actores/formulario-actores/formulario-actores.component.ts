@@ -9,9 +9,12 @@ import { actorCreacionDTO, actorDTO } from '../actor';
 })
 export class FormularioActoresComponent implements OnInit{
   constructor(private formBuilder: FormBuilder){}
-  
+
   @Input()
   modelo: actorDTO;
+
+  @Input()
+  errores: string[] = [];
 
   @Output()
   OnSubmit: EventEmitter<actorCreacionDTO> = new EventEmitter<actorCreacionDTO>();
@@ -32,7 +35,7 @@ export class FormularioActoresComponent implements OnInit{
       this.form.patchValue(this.modelo)
     }
   }
-  
+
   onSubmit(){
     this.OnSubmit.emit(this.form.value);
   }
