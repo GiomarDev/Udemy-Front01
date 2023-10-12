@@ -14,6 +14,9 @@ export class FormularioCineComponent implements OnInit{
   form: FormGroup
 
   @Input()
+  errores: string[] = [];
+
+  @Input()
   modelo: cineCreacionDTO;
 
   @Output()
@@ -31,7 +34,7 @@ export class FormularioCineComponent implements OnInit{
     if(this.modelo !== undefined){
       this.form.patchValue(this.modelo);
     }
-    
+
     this.coordenadaInicial.push({latitud: this.modelo.latitud, longitud: this.modelo.longitud})
   }
 
@@ -42,5 +45,5 @@ export class FormularioCineComponent implements OnInit{
   coordenadaSeleccionada(coordenada: Coordenada){
     this.form.patchValue(coordenada);
   }
-  
+
 }
