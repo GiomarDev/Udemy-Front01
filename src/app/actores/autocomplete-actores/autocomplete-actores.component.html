@@ -3,8 +3,8 @@
         <input type="text" placeholder="Seleccione los actores" matInput [formControl]="control" [matAutocomplete]="auto">
     </mat-form-field>
     <mat-autocomplete #auto (optionSelected)="optionSelected($event)">
-        <mat-option *ngFor="let opcion of actores" [value]="opcion">
-            <img [src]="opcion.imagen"> {{opcion.nombre}}
+        <mat-option *ngFor="let opcion of actoresAMostrar" [value]="opcion">
+            <img [src]="opcion.foto"> {{opcion.nombre}}
         </mat-option>
     </mat-autocomplete>
 </form>
@@ -17,7 +17,7 @@
   <ng-container matColumnDef="imagen">
     <th mat-header-cell *matHeaderCellDef>No.</th>
     <td mat-cell *matCellDef="let element">
-      <img style="width: 50px;" [src]="element.imagen" />
+      <img style="width: 50px;" [src]="element.foto" />
     </td>
   </ng-container>
 

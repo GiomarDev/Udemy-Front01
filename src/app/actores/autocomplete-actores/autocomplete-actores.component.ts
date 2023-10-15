@@ -1,8 +1,10 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteActivatedEvent, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatTable } from '@angular/material/table';
+import { actorPeliculaDTO } from '../actor';
+import { ActoresService } from '../actores.service';
 
 @Component({
   selector: 'app-autocomplete-actores',
@@ -11,31 +13,28 @@ import { MatTable } from '@angular/material/table';
 })
 export class AutocompleteActoresComponent implements OnInit{
 
+  constructor(private actoresService: ActoresService){}
+
   control: FormControl = new FormControl();
 
-  actores = [
-            {nombre: 'Tom Holland 1', personaje: '', imagen: 'https://th.bing.com/th/id/OIP.wOYrylBWQUkmPkqnQZLbFQAAAA?pid=ImgDet&rs=1'},
-            {nombre: 'Tom Holland 2', personaje: '', imagen: 'https://th.bing.com/th/id/OIP.wOYrylBWQUkmPkqnQZLbFQAAAA?pid=ImgDet&rs=1'},
-            {nombre: 'Tom Holland 3', personaje: '', imagen: 'https://th.bing.com/th/id/OIP.wOYrylBWQUkmPkqnQZLbFQAAAA?pid=ImgDet&rs=1'},
-            ]
-
-  actoresOriginal = this.actores;
-
-  actoresSeleccionados = [];
+  @Input()
+  actoresSeleccionados: actorPeliculaDTO[] = [];
 
   columnasAMostrar = ['imagen', 'nombre', 'personaje', 'acciones'];
+
+  actoresAMostrar: actorPeliculaDTO[] = [];
 
   @ViewChild(MatTable) table: MatTable<any>;
 
   ngOnInit(): void {
-    this.control.valueChanges.subscribe(valor => {
-      this.actores = this.actoresOriginal;
-      this.actores = this.actores.filter(actor => actor.nombre.indexOf(valor) != -1);
+    this.control.valueChanges.subscribe(nombre => {
+      this.actoresService.obtenerPorNombre(nombre).subscribe(actores => {
+        this.actoresAMostrar = actores;
+      })
     })
   }
 
   optionSelected(event: MatAutocompleteSelectedEvent){
-    console.log(event.option.value);
     this.actoresSeleccionados.push(event.option.value);
     this.control.patchValue('');
     if(this.table !== undefined){

@@ -1,3 +1,5 @@
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
 <form (submit)="guardarCambios()" [formGroup]="form">
     <mat-form-field appearance="outline">
         <mat-label>Título</mat-label>
@@ -13,7 +15,7 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Trailer</mat-label>
-        <input formControlName="trailer" matInput /> 
+        <input formControlName="trailer" matInput />
     </mat-form-field>
 
     <mat-form-field appearance="outline">
@@ -38,7 +40,7 @@
     <app-selector-multiple [NoSelecionados]="cinesNoSeleccionados" [Selecionados]="cinesSeleccionados"></app-selector-multiple>
 
     <h4>Seleccione los actores</h4>
-    <app-autocomplete-actores></app-autocomplete-actores>
+    <app-autocomplete-actores [actoresSeleccionados]="actoresSeleccionados"></app-autocomplete-actores>
 
     <div>
         <button mat-flat-button color="primary" [disabled]="form.invalid">
